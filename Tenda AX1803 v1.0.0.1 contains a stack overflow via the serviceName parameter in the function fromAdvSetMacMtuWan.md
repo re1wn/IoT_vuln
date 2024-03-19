@@ -16,7 +16,7 @@ The focus moves to the `fromAdvSetMacMtuWan` function. Here, the value "2" obtai
 ![QQ截图20240319211358](https://github.com/re1wn/IoT_vuln/assets/73987057/9f6e0dae-1e37-472c-b996-24ac6b0e64ab)
 In the `sub_8C594` function, the value of the `serviceName` parameter is extracted from the POST request, and then passed to the `strcpy` function, resulting in a buffer overflow.
 ![QQ截图20240319211701](https://github.com/re1wn/IoT_vuln/assets/73987057/026d7e87-40c4-4cec-9244-3f7048488b13)
-##POC
+## POC
 
 First SetValue with poc:
 
