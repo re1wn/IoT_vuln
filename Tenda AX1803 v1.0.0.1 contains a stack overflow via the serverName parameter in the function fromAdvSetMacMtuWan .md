@@ -8,18 +8,14 @@
 
 ## Vulnerability Description
 
-The `form_fast_setting_internet_set` function in Tenda AX1803 v1.0.0.1 first extracts the value of the `netWanType` parameter from the POST request, and then passes this value to the `sub_569BC` function as the third parameter. By controlling the content of the POST request, we set the value of the `netWanType` parameter to 2, which is then passed as the third parameter to the `sub_569BC` function.![QQ截图20240319205702](C:\Users\16673\Desktop\QQ截图20240319205702.png)
-
+The `form_fast_setting_internet_set` function in Tenda AX1803 v1.0.0.1 first extracts the value of the `netWanType` parameter from the POST request, and then passes this value to the `sub_569BC` function as the third parameter. By controlling the content of the POST request, we set the value of the `netWanType` parameter to 2, which is then passed as the third parameter to the `sub_569BC` function.
+![QQ截图20240319205702](https://github.com/re1wn/IoT_vuln/assets/73987057/b6325867-2962-481b-a4e5-34d6440196a8)
 In the `sub_569BC` function, the `sprintf` function is utilized to concatenate the `wan1.connecttype` string. Subsequently, the `SetValue` function is employed to assign the value of the environment variable `wan1.connecttype` to the third parameter `a3` passed into the `sub_569BC` function, with a value of 2.
-
-![QQ截图20240319205842](C:\Users\16673\Desktop\QQ截图20240319205842.png)
-
-The focus moves to the `fromAdvSetMacMtuWan` function. Here, the value "2" obtained from the POST request for the environment variable string `wan1.connecttype` is passed to `v6`, triggering the execution of the `sub_8C594` function.![QQ截图20240319211358](C:\Users\16673\Desktop\QQ截图20240319211358.png)
-
+![QQ截图20240319205842](https://github.com/re1wn/IoT_vuln/assets/73987057/0c519de9-7eaa-4483-bb83-993dd7678509)
+The focus moves to the `fromAdvSetMacMtuWan` function. Here, the value "2" obtained from the POST request for the environment variable string `wan1.connecttype` is passed to `v6`, triggering the execution of the `sub_8C594` function.
+![QQ截图20240319211358](https://github.com/re1wn/IoT_vuln/assets/73987057/88263b31-a9ac-4996-bd60-cf1a5dea13ac)
 In the `sub_8C594` function, the value of the `serviceName` parameter is extracted from the POST request, and then passed to the `strcpy` function, resulting in a buffer overflow.
-
-![QQ截图20240319214910](C:\Users\16673\Desktop\QQ截图20240319214910.png)
-
+![QQ截图20240319214910](https://github.com/re1wn/IoT_vuln/assets/73987057/0c22667d-f9d4-4817-b2bc-4ad9d66a93e2)
 ## POC
 
 First SetValue with poc:
